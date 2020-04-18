@@ -2,6 +2,7 @@ import history from '../history';
 import axios from 'axios';
 
 export function confirmAuth(code) {
+  console.log("Code: ", code);
   return dispatch => dispatch({
     type: 'USER_LOGIN',
     payload: axios({

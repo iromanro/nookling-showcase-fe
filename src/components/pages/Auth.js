@@ -13,6 +13,7 @@ export const Auth = (props) => {
       console.log(queryString.parse(props.location.search));
       var query = queryString.parse(props.location.search);
       var code = query.code;
+      console.log("Code in code: ", code);
 
       dispatch(confirmAuth(code));
     }
