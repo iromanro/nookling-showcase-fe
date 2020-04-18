@@ -6,7 +6,7 @@ export function confirmAuth(code) {
     type: 'USER_LOGIN',
     payload: axios({
       method: 'POST',
-      url: 'https://us-central1-nookling-showcase.cloudfunctions.net/auth/discord',
+      url: `${process.env.REACT_APP_API_URL}/api/v1/auth/discord`,
       headers: {
         'Content-Type': 'application/json',
       },
