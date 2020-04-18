@@ -20,7 +20,7 @@ const globalReducer = (
     }
     case 'USER_LOGIN_FULFILLED': {
       console.log("FULFILLED LOGIN");
-      console.log(action.)
+      //console.log(action.)
       return {
         ...state,
       };
