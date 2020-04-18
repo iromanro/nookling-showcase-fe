@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, Redirect } from "react-router-dom";
+//import { simpleAction } from './actions/simpleAction';
+import './axios';
+//import requireAuth from './utils/requireAuth';
+import Home from './components/pages/Home'
+import Event from './components/pages/Event'
+import Auth from './components/pages/Auth'
+import './App.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// const mapStateToProps = state => ({
+//   ...state,
+//   isAuthenticated: state.isAuthenticated
+// })
+
+// const mapDispatchToProps = dispatch => ({
+  //   //simpleAction: () => dispatch(simpleAction())
+  // })
+
+const App = ({ loading }) => loading !== true && (
+  <Switch>
+    {/* <Route path='/dashboard' component={requireAuth(Dashboard)}/> */}
+    <Route exact path='/' component={Home}/>
+    <Route exact path='/event' component={Event}/>
+    <Route exact path='/auth' component={Auth}/>
+    <Redirect to="/" />
+  </Switch>
+);
 
 export default App;

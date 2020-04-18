@@ -1,0 +1,51 @@
+@import 'main';
+
+.carousel.slide{
+
+  .carousel-indicator {
+    display: none;
+  }
+
+  .active{
+    background-color:red;
+  }
+}
+
+.carousel-indicator {
+  padding: 0;
+
+  .container {
+    padding: 0;
+
+    .col {
+      padding: 0;
+    }
+  }
+
+  .item {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  button {
+    background-color: #ffffff00;
+    color: #000;
+  }
+
+  .active {
+    border-color: $mainblue;
+  }
+
+  .ranking {
+    margin: 0;
+
+    .number {
+      margin: 0;
+    }
+    
+    .likes {
+      margin: 0;
+    }
+  }
+
+}

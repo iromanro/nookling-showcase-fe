@@ -1,0 +1,22 @@
+@import "~bootstrap/scss/bootstrap";
+
+$mainblue: #7ad3ff;
+
+html, body {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+#root {
+  background-color: $mainblue;
+}
+
+.main {
+  position: relative;
+  margin: 0 auto 0;
+  padding-bottom: 10%;
+  width: calc(100% - 40px);
+  max-width: 935px;
+  min-height: 100vh;
+  background-color: #e3e2e2;
+}

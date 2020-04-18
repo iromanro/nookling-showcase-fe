@@ -1,17 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import history from './history';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './styles/main.scss';
+import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// import setAuthorizationToken from './utils/setAuthorizationToken';
+// import { setCurrentUser } from './actions/userActions';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const app = props => <App {...props}/>;
+
+function render(options = {}){
+  ReactDOM.render((
+    <Provider store={store}>
+      <Router history={history}>
+        {app()}
+      </Router>
+    </Provider>),
+    document.getElementById('root')
+  );
+}
+
+render();
+// var userTkn = Cookies.get('tkn');
+// if(userTkn){
+//   // setAuthorizationToken(token);
+//   // store.dispatch(setCurrentUser(userTkn));
+//   render();
+// }
+// else{
+//   render();
+// }
+
+registerServiceWorker();
+export default render;
