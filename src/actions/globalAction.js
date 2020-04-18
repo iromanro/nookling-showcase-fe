@@ -1,5 +1,5 @@
-import history from '../history';
-import axios from 'axios';
+import history from '../history'
+import axios from 'axios'
 
 export function confirmAuth(code) {
   console.log("Code: ", code);
@@ -17,6 +17,8 @@ export function confirmAuth(code) {
       },
     }).then((user) => {
       console.log("User: ", user);
+    }).catch((err) => {
+      history.push('/')
     })
   })
 }
