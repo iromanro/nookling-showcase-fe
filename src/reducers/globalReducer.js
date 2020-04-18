@@ -13,6 +13,7 @@ const globalReducer = (
       };
     }
     case 'USER_LOGIN_REJECTED': {
+      console.log("LOGIN FAILED");
       return {
         ...state,
       };
