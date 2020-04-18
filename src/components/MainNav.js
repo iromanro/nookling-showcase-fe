@@ -8,7 +8,7 @@ export const MainNav = (props) => {
 
 
   const discordLogin = () => {
-    window.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=700548602799325245&redirect_uri=https%3A%2F%2Fwww.nooklingshowcase.com%2Fauth&response_type=code&scope=identify%20email';
+    window.location.href = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=https%3A%2F%2Fnookling-showcase-fe.herokuapp.com%2Fauth&response_type=code&scope=identify%20email`;
   }
 
   return (
