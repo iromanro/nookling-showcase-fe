@@ -16,11 +16,6 @@ export function confirmAuth(code) {
       data: {
         code,
       },
-    }).then((user) => {
-      console.log("User: ", user)
-    }).catch((err) => {
-      console.log("GOT THE ERROR")
-      //history.push('/')
     })
   })
 }
