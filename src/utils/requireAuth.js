@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 export default ComposedComponent => {
   class Authenticate extends React.Component {
     render () {
+      console.log("PROPS ", this.props);
       return !this.props.isAuthenticated ? <Redirect to='/' /> : (
         <ComposedComponent {...this.props} />
       );

@@ -34,14 +34,12 @@ export const MainNav = (props) => {
           <Nav className="mr-auto">
             <Nav.Link onClick={() => goToPage('/homes')}>Homes</Nav.Link>
             <Nav.Link onClick={() => goToPage('/patterns')}>Custom Patterns</Nav.Link>
+            {user.isAuthenticated && <Nav.Link onClick={() => goToPage('/profile')}>Profile</Nav.Link>}
+            {user.isAuthenticated && <Nav.Link onClick={() => goToPage('/settings')}>Settings</Nav.Link>}
             {!user.isAuthenticated ?
               <Nav.Link onClick={() => discordLogin()}>Log in</Nav.Link>
               :
-              <div>
-                <Nav.Link onClick={() => goToPage('/profile')}>Profile</Nav.Link>
-                <Nav.Link onClick={() => goToPage('/settings')}>Settings</Nav.Link>
-                <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
-              </div>
+              <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
             }
           </Nav>
         </Navbar.Collapse>

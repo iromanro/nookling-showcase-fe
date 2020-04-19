@@ -16,7 +16,6 @@ export const Home = (props) => {
 
   return(
     <div className="main">
-      <ToastMessage />
       <MainNav />
       <Container>
         <Col className="main-content">
@@ -33,6 +32,7 @@ export const Home = (props) => {
           <ResultsList />
         </Col>
       </Container>
+      <ToastMessage />
     </div>
   )
 }
