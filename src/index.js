@@ -24,16 +24,15 @@ function render(options = {}){
   );
 }
 
-render();
-// var userTkn = Cookies.get('tkn');
-// if(userTkn){
-//   // setAuthorizationToken(token);
-//   // store.dispatch(setCurrentUser(userTkn));
-//   render();
-// }
-// else{
-//   render();
-// }
+var token = localStorage.get('jwt');
+if(token){
+  setAuthorizationToken(token);
+  store.dispatch(setCurrentUser(jwt.decode(token)));
+  render();
+}
+else{
+  render();
+}
 
 registerServiceWorker();
 export default render;

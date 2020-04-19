@@ -3,21 +3,21 @@ import localStorage from 'store';
 import store from './store';
 // import { logoutUser } from './actions/userActions';
 
-// axios.interceptors.request.use((config) => {
-//   const jwt = localStorage.get('jwt');
-//   const newConfig = config;
+axios.interceptors.request.use((config) => {
+  const jwt = localStorage.get('jwt');
+  const newConfig = config;
 
-//   if (jwt) {
-//     const bearer = `Bearer ${jwt}`;
-//     newConfig.headers.common.Authorization = bearer;
+  if (jwt) {
+    const bearer = `Bearer ${jwt}`;
+    newConfig.headers.common.Authorization = bearer;
 
-//     return newConfig;
-//   } else {
-//     delete newConfig.headers.common.Authorization;
+    return newConfig;
+  } else {
+    delete newConfig.headers.common.Authorization;
 
-//     return newConfig;
-//   }
-// });
+    return newConfig;
+  }
+});
 
 // axios.interceptors.response.use((response) => {
 //     return response;

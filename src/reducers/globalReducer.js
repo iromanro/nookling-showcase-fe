@@ -1,4 +1,6 @@
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 import _ from 'underscore';
+import localStorage from 'store';
 
 const globalReducer = (
   state = {
@@ -19,10 +21,19 @@ const globalReducer = (
       };
     }
     case 'USER_LOGIN_FULFILLED': {
-      console.log("FULFILLED LOGIN");
-      //console.log(action.)
+      setAuthorizationToken(action.payload.data.jwt);
+      var userToken = jwt.decode(action.payload.data.jwt);
+      localStorage.set('jwt', action.payload.data.jwt);
+
+      let userState = {
+        isAuthenticated: true,
+        username: userToken.username,
+        discriminator: userToken.discriminator,
+      }
+
       return {
         ...state,
+        user: userState,
       };
     }
     default:
