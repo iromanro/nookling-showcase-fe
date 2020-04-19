@@ -18,7 +18,7 @@ export const Auth = (props) => {
   }, [user])
 
   useEffect(() => {
-    consold.lob("dispatching login"); 
+    console.log("dispatching login"); 
     function authUser() {
       var query = queryString.parse(props.location.search)
       var code = query.code
