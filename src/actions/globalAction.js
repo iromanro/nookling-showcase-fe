@@ -4,7 +4,6 @@ import localStorage from 'store'
 import setAuthorizationToken from '../utils/setAuthorizationToken'
 
 export function confirmAuth(code) {
-  console.log("Code: ", code);
   return dispatch => dispatch({
     type: 'USER_LOGIN',
     payload: axios({

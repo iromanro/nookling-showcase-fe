@@ -22,6 +22,7 @@ const globalReducer = (
       };
     }
     case 'USER_LOGIN_FULFILLED': {
+      console.log("login: ", action.payload);
       setAuthorizationToken(action.payload.data.jwt)
       var userToken = jwt.decode(action.payload.data.jwt)
       localStorage.set('jwt', action.payload.data.jwt)
