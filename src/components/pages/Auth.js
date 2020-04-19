@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { confirmAuth } from '../../actions/globalAction'
-import history from '../history'
+import history from '../../history'
 import queryString from 'query-string'
 import '../../styles/main.scss'
 import MainNav from '../MainNav'
