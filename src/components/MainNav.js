@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from '../../actions/globalAction'
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
+import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { userLogout } from '../actions/globalAction'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 export const MainNav = (props) => {
   const dispatch = useDispatch();
