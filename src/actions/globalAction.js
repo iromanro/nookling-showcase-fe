@@ -1,5 +1,6 @@
 import history from '../history'
 import axios from 'axios'
+import localStorage from 'store'
 import setAuthorizationToken from '../utils/setAuthorizationToken'
 
 export function confirmAuth(code) {
