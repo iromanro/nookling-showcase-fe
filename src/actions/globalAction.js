@@ -18,7 +18,8 @@ export function confirmAuth(code) {
       },
     }).then((user) => {
     }).catch((err) => {
-      history.push('/')
+      console.log("GOT THE ERROR")
+      //history.push('/')
     })
   })
 }
