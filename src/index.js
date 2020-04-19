@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import jwt from 'jsonwebtoken'
+import localStorage from 'store';
 import registerServiceWorker from './registerServiceWorker'
 import setAuthorizationToken from './utils/setAuthorizationToken'
 import { setCurrentUser } from './actions/globalAction'
