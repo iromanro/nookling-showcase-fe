@@ -1,12 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import history from './history';
-import App from './App';
-import './styles/main.scss';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import registerServiceWorker from './registerServiceWorker'
+import setAuthorizationToken from './utils/setAuthorizationToken'
+import setCurrentUser from './actions/globalAction'
+import store from './store'
+import history from './history'
+import App from './App'
+import './styles/main.scss'
 
 // import setAuthorizationToken from './utils/setAuthorizationToken';
 // import { setCurrentUser } from './actions/userActions';
