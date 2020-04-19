@@ -8,11 +8,13 @@ import FullScreenLoader from '../FullScreenLoader'
 import { compose } from 'redux'
 
 export const Auth = (props) => {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.global.user);
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.global.user)
 
   useEffect(() => {
+    console.log("USER EFFECT: ", user)
     if (user.username) {
+      console.log("We have this user: ", user.username)
       //history.push('/')
     }
   }, [user])
