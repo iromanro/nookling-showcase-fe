@@ -36,9 +36,11 @@ export const MainNav = (props) => {
             {!user.isAuthenticated ?
               <Nav.Link onClick={() => discordLogin()}>Log in</Nav.Link>
               :
-              <Nav.Link onClick={() => goToPage('/profile')}>Profile</Nav.Link>
-              <Nav.Link onClick={() => goToPage('/settings')}>Settings</Nav.Link>
-              <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
+              <div>
+                <Nav.Link onClick={() => goToPage('/profile')}>Profile</Nav.Link>
+                <Nav.Link onClick={() => goToPage('/settings')}>Settings</Nav.Link>
+                <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
+              </div>
             }
           </Nav>
         </Navbar.Collapse>
