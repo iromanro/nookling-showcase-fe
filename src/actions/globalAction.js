@@ -1,5 +1,6 @@
 import history from '../history'
 import axios from 'axios'
+import setAuthorizationToken from '../utils/setAuthorizationToken'
 
 export function confirmAuth(code) {
   console.log("Code: ", code);
@@ -16,10 +17,23 @@ export function confirmAuth(code) {
         code,
       },
     }).then((user) => {
-      console.log("User: ", user);
     }).catch((err) => {
-      console.log(err);
       history.push('/')
     })
   })
+}
+
+export function userLogout() {
+  return dispatch => {
+    localStorage.remove('jwt')
+    setAuthorizationToken(false)
+    dispatch(setCurrentUser({}))
+  }
+}
+
+export function setCurrentUser(user) {
+  return dispatch => dispatch({
+    type: 'SET_CURRENT_USER',
+    user,
+  });
 }

@@ -1,6 +1,7 @@
-import setAuthorizationToken from '../utils/setAuthorizationToken';
-import _ from 'underscore';
-import localStorage from 'store';
+import setAuthorizationToken from '../utils/setAuthorizationToken'
+import _ from 'underscore'
+import localStorage from 'store'
+import jwt from 'jsonwebtoken'
 
 const globalReducer = (
   state = {
@@ -15,15 +16,15 @@ const globalReducer = (
       };
     }
     case 'USER_LOGIN_REJECTED': {
-      console.log("LOGIN FAILED");
+      console.log("LOGIN FAILED")
       return {
         ...state,
       };
     }
     case 'USER_LOGIN_FULFILLED': {
-      setAuthorizationToken(action.payload.data.jwt);
-      var userToken = jwt.decode(action.payload.data.jwt);
-      localStorage.set('jwt', action.payload.data.jwt);
+      setAuthorizationToken(action.payload.data.jwt)
+      var userToken = jwt.decode(action.payload.data.jwt)
+      localStorage.set('jwt', action.payload.data.jwt)
 
       let userState = {
         isAuthenticated: true,
@@ -34,6 +35,12 @@ const globalReducer = (
       return {
         ...state,
         user: userState,
+      };
+    }
+    case 'SET_CURRENT_USER': {
+      return {
+        ...state,
+        user: action.user,
       };
     }
     default:

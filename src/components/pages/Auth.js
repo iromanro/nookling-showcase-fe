@@ -4,7 +4,7 @@ import { confirmAuth } from '../../actions/globalAction'
 import history from '../../history'
 import queryString from 'query-string'
 import '../../styles/main.scss'
-import MainNav from '../MainNav'
+import FullScreenLoader from '../FullScreenLoader'
 
 export const Auth = (props) => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const Auth = (props) => {
 
   return(
     <div className="main">
-
+      <FullScreenLoader />
     </div>
   )
 }
