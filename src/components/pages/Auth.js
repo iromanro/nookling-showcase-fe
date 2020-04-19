@@ -11,7 +11,9 @@ export const Auth = (props) => {
   const user = useSelector(state => state.global.user);
 
   useEffect(() => {
-    history.push('/')
+    if (user.username) {
+      history.push('/')
+    }
   }, [user])
 
   useEffect(() => {
