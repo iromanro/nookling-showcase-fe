@@ -45,7 +45,7 @@ const globalReducer = (
     case 'SET_CURRENT_USER': {
       console.log("SET USER ACTION: ", action);
       
-      if(user == {}) {
+      if(action.user == {}) {
         return {
           ...state,
           user: {},
@@ -55,8 +55,8 @@ const globalReducer = (
       } else {
         let userState = {
           isAuthenticated: true,
-          username: userToken.username,
-          discriminator: userToken.discriminator,
+          username: action.user.username,
+          discriminator: action.user.discriminator,
         }
 
         return {
