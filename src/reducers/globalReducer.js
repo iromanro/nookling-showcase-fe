@@ -38,21 +38,32 @@ const globalReducer = (
       return {
         ...state,
         user: userState,
+        toastErr: false,
+        toastMsg: "Logged in successfully!",
       };
     }
     case 'SET_CURRENT_USER': {
       console.log("SET USER ACTION: ", action);
-      let userState = {
-        isAuthenticated: true,
-        username: userToken.username,
-        discriminator: userToken.discriminator,
+      
+      if(user == {}) {
+        return {
+          ...state,
+          user: {},
+          toastErr: false,
+          toastMsg: "Logged out successfully!",
+        };
+      } else {
+        let userState = {
+          isAuthenticated: true,
+          username: userToken.username,
+          discriminator: userToken.discriminator,
+        }
+
+        return {
+          ...state,
+          user: userState,
+        };
       }
-      return {
-        ...state,
-        user: action.user,
-        toastErr: false,
-        toastMsg: "Logged in successfully!"
-      };
     }
     default:
       return state;
