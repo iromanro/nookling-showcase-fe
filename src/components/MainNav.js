@@ -25,7 +25,7 @@ export const MainNav = (props) => {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Homes</Nav.Link>
             <Nav.Link href="#link">Custom Patterns</Nav.Link>
-            {user.isAuthenticated ?
+            {!user.isAuthenticated ?
               <Nav.Link onClick={() => discordLogin()}>Log in</Nav.Link>
               :
               <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
