@@ -39,6 +39,7 @@ const globalReducer = (
       };
     }
     case 'SET_CURRENT_USER': {
+      console.log("SET USER ACTION: ", action);
       return {
         ...state,
         user: action.user,

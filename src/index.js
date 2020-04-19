@@ -30,13 +30,14 @@ function render(options = {}){
 
 var token = localStorage.get('jwt');
 if(token){
-  setAuthorizationToken(token);
-  store.dispatch(setCurrentUser(jwt.decode(token)));
-  render();
+  console.log("WE GOT AUTH ALREADY")
+  setAuthorizationToken(token)
+  store.dispatch(setCurrentUser(jwt.decode(token)))
+  render()
 }
 else{
-  render();
+  render()
 }
 
-registerServiceWorker();
-export default render;
+registerServiceWorker()
+export default render
