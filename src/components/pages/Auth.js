@@ -5,6 +5,7 @@ import history from '../../history'
 import queryString from 'query-string'
 import '../../styles/main.scss'
 import FullScreenLoader from '../FullScreenLoader'
+import { compose } from 'redux'
 
 export const Auth = (props) => {
   const dispatch = useDispatch();
@@ -12,11 +13,12 @@ export const Auth = (props) => {
 
   useEffect(() => {
     if (user.username) {
-      history.push('/')
+      //history.push('/')
     }
   }, [user])
 
   useEffect(() => {
+    consold.lob("dispatching login"); 
     function authUser() {
       var query = queryString.parse(props.location.search)
       var code = query.code
