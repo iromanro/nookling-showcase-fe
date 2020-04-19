@@ -45,3 +45,21 @@
     margin: 0 5px;
   }
 }
+
+.full-screen-loader {
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-content {
+  background-color: #ffffff00;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  border: none;
+
+  .spinner-border {
+    width: 6rem;
+    height: 6rem;
+  }
+}
