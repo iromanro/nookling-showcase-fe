@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken'
 const globalReducer = (
   state = {
     user: {},
+    toastMsg: "",
+    toastErr: false,
   },
   action,
 ) => {
@@ -48,6 +50,8 @@ const globalReducer = (
       return {
         ...state,
         user: action.user,
+        toastErr: false,
+        toastMsg: "Logged in successfully!"
       };
     }
     default:

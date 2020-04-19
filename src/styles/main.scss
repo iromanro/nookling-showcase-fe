@@ -1,6 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 
 $mainblue: #7ad3ff;
+$mainGreen: #558c6f;
+$mainRed: #ff8181;
 
 html, body {
   height: 100vh;
@@ -19,4 +21,22 @@ html, body {
   max-width: 935px;
   min-height: 100vh;
   background-color: #e3e2e2;
+}
+
+.toast {
+  position: sticky;
+  bottom: 5%;
+  left: 100%;
+  font-family: 'prestige-elite-std', sans-serif;
+  font-weight: 900;
+  color: $mainGreen;
+  text-align: center;
+  border: solid 2px $mainGreen;
+  border-radius: 1em;
+  white-space: pre-wrap;
+}
+
+.toast.error {
+  color: $mainRed;
+  border: solid 2px $mainRed;
 }

@@ -9,12 +9,14 @@ import Nav from 'react-bootstrap/Nav'
 import MainNav from '../MainNav'
 import FilterBar from '../FilterBar'
 import ResultsList from '../ResultsList'
+import ToastMessage from '../ToastMessage'
 
 export const Home = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   return(
     <div className="main">
+      <ToastMessage />
       <MainNav />
       <Container>
         <Col className="main-content">
