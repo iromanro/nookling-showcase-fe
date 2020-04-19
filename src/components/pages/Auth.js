@@ -15,17 +15,19 @@ export const Auth = (props) => {
     console.log("USER EFFECT: ", user)
     if (user.username) {
       console.log("We have this user: ", user.username)
-      //history.push('/')
+      history.push('/')
     }
   }, [user])
 
   useEffect(() => {
     console.log("dispatching login"); 
     function authUser() {
-      var query = queryString.parse(props.location.search)
-      var code = query.code
+      if (!user.username) {
+        var query = queryString.parse(props.location.search)
+        var code = query.code
 
-      dispatch(confirmAuth(code))
+        dispatch(confirmAuth(code))
+      }
     }
 
     authUser()
