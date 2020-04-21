@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
 import '../../styles/events.scss';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -9,7 +8,7 @@ import TopHomes from '../TopHomes';
 import TopDesigns from '../TopDesigns';
 
 export const Home = (props) => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   return(
     <div className="main">

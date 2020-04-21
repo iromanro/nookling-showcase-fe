@@ -29,8 +29,9 @@ function render(options = {}){
 }
 
 var token = localStorage.get('jwt');
+
 if(token){
-  console.log("WE GOT AUTH ALREADY")
+  console.log("tkn", token)
   setAuthorizationToken(token)
   store.dispatch(setCurrentUser(jwt.decode(token)))
   render()

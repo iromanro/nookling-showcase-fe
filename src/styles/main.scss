@@ -2,7 +2,7 @@
 
 $mainblue: #7ad3ff;
 $mainGreen: #558c6f;
-$mainRed: #ff8181;
+$mainRed: #ff4b4b;
 
 html, body {
   height: 100vh;
@@ -20,7 +20,8 @@ html, body {
   width: calc(100% - 40px);
   max-width: 935px;
   min-height: 100vh;
-  background-color: #e3e2e2;
+  background-color: #8CDFD6;
+  box-shadow: rgb(62, 62, 62) 0px 0px 10px;
 }
 
 .toast {
@@ -29,6 +30,7 @@ html, body {
   left: 100%;
   font-family: 'prestige-elite-std', sans-serif;
   font-weight: 900;
+  background-color: #fff;
   color: $mainGreen;
   text-align: center;
   border: solid 2px $mainGreen;
@@ -39,4 +41,10 @@ html, body {
 .toast.error {
   color: $mainRed;
   border: solid 2px $mainRed;
+}
+
+.form-group {
+  input {
+
+  }
 }

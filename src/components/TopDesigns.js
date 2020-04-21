@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -8,7 +7,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import asset from '../Asset.jpg';
 
 export const TopHomes = (props) => {
-  const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
 

@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
-import Toast from 'react-bootstrap/Toast';
+import { useDispatch, useSelector } from "react-redux"
+import { clearToast } from '../actions/globalAction'
+import Toast from 'react-bootstrap/Toast'
 
 const ToastMessage = (props) => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
+  const [show, setShow] = useState(false)
 
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => {
+    if(show) {
+      dispatch(clearToast())
+    }
+
+    setShow(!show)
+  }
+  
   const toastErr = useSelector(state => state.global.toastErr);
   const toastMsg = useSelector(state => state.global.toastMsg);
 
   useEffect(() => {
-    if(toastMsg != "") {
+    if (show) {
+      dispatch(clearToast())
+    }
+
+    if(toastMsg !== "") {
       toggleShow();
     }
   }, [toastMsg])

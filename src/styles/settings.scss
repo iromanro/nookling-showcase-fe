@@ -1,0 +1,105 @@
+@import 'main';
+
+@media (min-width: 0px) {
+  .settings {
+    height: 100vh;
+
+    .user-info {
+      height: 70%;
+      align-content: center;
+      margin: 0px 10px;
+      
+      .discord {
+        margin-bottom: 20px;
+        padding: 0;
+      }
+
+      .discord img {
+        height: 124px;
+        width: 124px;
+        border: 1px solid;
+        object-fit: none;
+        margin: 5px 20px;x
+
+        .row {
+          margin: 20px;
+        }
+      }
+
+      .display-name {
+        padding: 0;
+      }
+
+      .username {
+        margin: 5px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+      
+      .custom-control label {
+        padding-left: 30px;
+        margin-top: 10px;
+      }
+
+      .custom-control label::before {
+        width: 30%;
+        height: 100%;
+        top: 0.1rem;
+      }
+
+      .custom-control label::after {
+        width: 1rem;
+        height: 1rem;
+        left: calc(-2.25rem + 25px);
+        top: 0.35rem;
+        transform: translateX(-1.3rem);
+      }
+    }
+
+    .save-settings {
+      margin-left: 10px;
+    }
+
+    .error {
+      color: $mainRed;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #2364AA;
+    }
+
+    input {
+      border-color: #2364AA;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .settings {
+
+    .user-info {
+      height: 45%;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .settings {
+
+    .user-info {
+      height: 45%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .settings {
+
+    .user-info {
+      height: 45%;
+    }
+  }
+}

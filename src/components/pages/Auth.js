@@ -5,7 +5,6 @@ import history from '../../history'
 import queryString from 'query-string'
 import '../../styles/main.scss'
 import FullScreenLoader from '../FullScreenLoader'
-import { compose } from 'redux'
 
 export const Auth = (props) => {
   const dispatch = useDispatch()

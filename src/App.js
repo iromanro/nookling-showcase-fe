@@ -24,7 +24,7 @@ const App = ({ loading }) => loading !== true && (
     <Route exact path='/' component={Home}/>
     <Route exact path='/event' component={Event}/>
     <Route exact path='/auth' component={Auth}/>
-    <Route exact path='/settings' component={Auth}/>
+    <Route exact path='/settings' component={Settings}/>
     <Redirect to="/" />
   </Switch>
 );

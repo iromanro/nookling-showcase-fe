@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
 import '../../styles/main.scss';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -12,8 +11,6 @@ import ResultsList from '../ResultsList'
 import ToastMessage from '../ToastMessage'
 
 export const Home = (props) => {
-  const dispatch = useDispatch()
-
   return(
     <div className="main">
       <MainNav />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { userLogout } from '../actions/globalAction'
 import history from '../history'
@@ -14,7 +14,11 @@ export const MainNav = (props) => {
   }, [user])
 
   const discordLogin = () => {
-    window.location.href = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=https%3A%2F%2Fnookling-showcase-fe.herokuapp.com%2Fauth&response_type=code&scope=identify%20email`;
+    if(process.env.NODE_ENV === 'development') {
+      window.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=701531720817574118&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&response_type=code&scope=identify%20email';
+    } else {
+      window.location.href = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=https%3A%2F%2Fnookling-showcase-fe.herokuapp.com%2Fauth&response_type=code&scope=identify%20email`;
+    }
   }
 
   const logout = () => {
