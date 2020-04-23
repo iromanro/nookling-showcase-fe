@@ -118,15 +118,17 @@ export const Settings = (props) => {
         <Container className="settings">
           {settings != null ?
             <Row className="user-info">
-              <Col xs={12} sm={6} lg={6} className="discord">
+              <Col xs={12}className="display-info">
                 <Row>
                   <Image src="https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png" roundedCircle />
                 </Row>
+                {settings.discordSync === true ? 
                 <Row className="username">
                   {settings.username}#{settings.discriminator}
                 </Row>
+                : '' }
               </Col>
-              <Col xs={12} sm={6} lg={6} className="display-name">
+              <Col xs={12} sm={6} lg={6} className="display-name px-3">
                 <Form>
                   <Form.Group controlId="formDisplayName">
                     <Form.Label>Display Name</Form.Label>
@@ -140,76 +142,74 @@ export const Settings = (props) => {
                     <Form.Text className="sublabel">
                       Customize your display name!
                     </Form.Text>
+                    {settings.discordSync === true ?
                     <Form.Check 
                       type="switch"
                       id="hide-discord-username"
                       label="Hide discord username"
                       onChange={() => toggleDiscordHide()}
                       checked={discordHide ? true : false}
-                    />
+                    /> : '' }
                   </Form.Group>
                 </Form>
               </Col>
               <Col xs={12} sm={6} lg={6} className="socials">
-                <Row>
-                  <Form>
-                    <Form.Group controlId="formTwitter">
-                      <Form.Label>Twitter</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Twitter username"
-                        maxLength={15}
-                        value={twitterName}
-                        onChange={e => twitterUpdate(e.target.value)}
-                      />
-                    </Form.Group>
-                  </Form>
-                </Row>
-                <Row>
-                  <Form>
-                    <Form.Group controlId="formInstagram">
-                      <Form.Label>Instagram</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Instagram Username"
-                        maxLength={30}
-                        value={instagramName}
-                        onChange={e => instagramUpdate(e.target.value)}
-                      />
-                    </Form.Group>
-                  </Form>
-                </Row>
+                <Form>
+                  <Form.Group controlId="formTwitter">
+                    <Form.Label>Twitter</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Twitter username"
+                      maxLength={15}
+                      value={twitterName}
+                      onChange={e => twitterUpdate(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
+              </Col>
+              <Col>
+                <Form>
+                  <Form.Group controlId="formInstagram">
+                    <Form.Label>Instagram</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Instagram Username"
+                      maxLength={30}
+                      value={instagramName}
+                      onChange={e => instagramUpdate(e.target.value)}
+                    />
+                  </Form.Group>
+                </Form>
               </Col>
               <Col xs={12} sm={6} lg={6}>
-                <Row>
-                  <Form>
-                    <Form.Group controlId="formSwitchFriendCode">
-                      <Form.Label>Switch Friend Code</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="XXXX-XXXX-XXXX"
-                        onChange={e => switchNameUpdate(e.target.value)}
-                        maxLength={15}
-                        value={friendCode}
-                      />
-                      {friendCodeError ?
-                        <Form.Text className="error">
-                          Format: xxxx-xxxx-xxxx
-                        </Form.Text> : ''
-                      }
-                    </Form.Group>
-                  </Form>
-                </Row>
+                <Form>
+                  <Form.Group controlId="formSwitchFriendCode">
+                    <Form.Label>Switch Friend Code</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="xxxx-xxxx-xxxx"
+                      onChange={e => switchNameUpdate(e.target.value)}
+                      maxLength={15}
+                      value={friendCode}
+                    />
+                    {friendCodeError ?
+                      <Form.Text className="error">
+                        Format: xxxx-xxxx-xxxx
+                      </Form.Text> : ''
+                    }
+                  </Form.Group>
+                </Form>
               </Col>
             </Row> : ''
           }
           {settings != null &&
-            <Button
-              className="save-settings" 
-              onClick={saveSettings}
-            >
-              Save
-            </Button>
+            <Row className="save-settings my-2">
+              <Button
+                onClick={saveSettings}
+              >
+                Save
+              </Button>
+            </Row>
           }
         </Container>
       }

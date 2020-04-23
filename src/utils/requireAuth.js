@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-//import { logoutUser } from '../actions/userActions';
+import { userLogout } from '../actions/globalAction';
 
 export default ComposedComponent => {
   class Authenticate extends React.Component {
@@ -19,11 +19,11 @@ export default ComposedComponent => {
   };
 
   function mapStateToProps(state){
+    console.log(state)
     return {
-      isAuthenticated: state.user.isAuthenticated,
-      role: state.user.role,
+      isAuthenticated: state.global.user.isAuthenticated,
     };
   }
 
-  return connect(mapStateToProps, { logoutUser })(Authenticate);
+  return connect(mapStateToProps, { userLogout })(Authenticate);
 };

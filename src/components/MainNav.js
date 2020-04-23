@@ -13,12 +13,8 @@ export const MainNav = (props) => {
 
   }, [user])
 
-  const discordLogin = () => {
-    if(process.env.NODE_ENV === 'development') {
-      window.location.href = 'https://discordapp.com/api/oauth2/authorize?client_id=701531720817574118&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&response_type=code&scope=identify%20email';
-    } else {
-      window.location.href = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=https%3A%2F%2Fnookling-showcase-fe.herokuapp.com%2Fauth&response_type=code&scope=identify%20email`;
-    }
+  const login = () => {
+    history.push('/login')
   }
 
   const logout = () => {
@@ -26,7 +22,7 @@ export const MainNav = (props) => {
   }
 
   const goToPage = (page) => {
-    history.push(page);
+    history.push(page)
   }
 
   return (
@@ -41,7 +37,7 @@ export const MainNav = (props) => {
             {user.isAuthenticated && <Nav.Link onClick={() => goToPage('/profile')}>Profile</Nav.Link>}
             {user.isAuthenticated && <Nav.Link onClick={() => goToPage('/settings')}>Settings</Nav.Link>}
             {!user.isAuthenticated ?
-              <Nav.Link onClick={() => discordLogin()}>Log in</Nav.Link>
+              <Nav.Link onClick={() => login()}>Log in</Nav.Link>
               :
               <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
             }

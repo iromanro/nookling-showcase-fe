@@ -9,17 +9,19 @@
       align-content: center;
       margin: 0px 10px;
       
-      .discord {
-        margin-bottom: 20px;
+      .display-info {
+        margin: 20px 0;
         padding: 0;
+        display: grid;
+        justify-content: center;
       }
 
-      .discord img {
+      .display-info img {
         height: 124px;
         width: 124px;
         border: 1px solid;
         object-fit: none;
-        margin: 5px 20px;x
+        margin: 5px 20px;
 
         .row {
           margin: 20px;
@@ -41,6 +43,7 @@
       .custom-control label {
         padding-left: 30px;
         margin-top: 10px;
+        font-size: 14px;
       }
 
       .custom-control label::before {
@@ -59,7 +62,23 @@
     }
 
     .save-settings {
-      margin-left: 10px;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 15px;
+    }
+
+    .save-settings {
+      .btn{
+          margin-right: 20px;
+          width: 200px;
+          border: 1px solid;
+          border-radius: 20px;
+          background-color: $altBlue;
+      }
+
+      .btn:hover {      
+      background-color: $altBlueDark;
+      }
     }
 
     .error {
