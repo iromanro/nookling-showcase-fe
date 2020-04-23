@@ -29,6 +29,9 @@
   }
 
   .discord-login {
+    display: flex;
+    justify-content: center;
+
     button {
       width: 200px;
       border: 1px solid;
@@ -49,6 +52,9 @@
   }
 
   .google-login {
+    display: flex;
+    justify-content: center;
+    
     button {
       width: 200px;
       border: 1px solid;

@@ -294,7 +294,7 @@ export const LoginForm = (props) => {
               </div>
             </Row>
             <Row className="pt-3">
-              <Col xs={12} md={6} className="discord-login">
+              <Col xs={12} lg={6} className="discord-login my-2">
                 <Button
                   className="btn"
                   disabled={loading}
@@ -304,7 +304,7 @@ export const LoginForm = (props) => {
                   {loading ? loader : 'Log in with Discord'}
                 </Button>
               </Col>
-              <Col xs={12} md={6} className="google-login">
+              <Col xs={12} lg={6} className="google-login my-2">
                 <Button
                   className="btn"
                   disabled={loading}
