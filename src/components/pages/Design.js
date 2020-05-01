@@ -10,23 +10,15 @@ import FilterBar from "../FilterBar"
 import ResultsList from "../ResultsList"
 import ToastMessage from "../ToastMessage"
 
-const Home = () => {
+const Design = () => {
+  console.log("WE GOT THE Design")
+
   return (
     <div className="main">
       <MainNav />
       <Container>
         <Col className="main-content">
-          <Row>
-            <Navbar bg="light" expand="lg">
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav>
-                  <FilterBar />
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-          </Row>
-          {/* <ResultsList /> */}
+
         </Col>
       </Container>
       <ToastMessage />
@@ -34,4 +26,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Design

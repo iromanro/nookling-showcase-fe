@@ -1,0 +1,219 @@
+@import 'main';
+
+@media (min-width: 0px) {
+  .profile {
+    // height: 100vh;
+
+    .user-info {
+      height: 200px;
+      align-content: center;
+      margin: 100px 0;
+      display: flex;
+      justify-content: center;
+      
+      .display-info {
+        margin: 20px;
+        padding: 0 15px;
+      }
+
+      .display-info .row {
+        display: grid;
+        justify-content: flex-start;
+      }
+
+      .display-info img {
+        height: 124px;
+        width: 124px;
+        border: 1px solid;
+        object-fit: none;
+        margin-left: 5px;
+
+        .row {
+          margin: 20px;
+        }
+      }
+
+      .username {
+        margin: 5px -15px;
+      }
+
+      .socials {
+        margin: 20px 20px;
+
+        .display-name {
+          h1 {
+            font-size: 24px;
+          }
+
+          .col-12 {
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .filters {
+      //background-color: green;
+      margin: 0;
+      height: 15vh;
+      width: inherit;
+      margin-bottom: 30px;
+
+      .col-12 {
+        padding: 0;
+      }
+
+      .expand-button {
+        width: 100%;
+        height: 50%;
+        background-color: $greenBrand;
+        border: 1px solid $greenBrand;
+        color: #000;
+        padding: 0;
+        padding-left: -15px;
+        padding-right: -15px;
+      }
+
+      .btn-primary:active {
+        background-color: $greenAccent !important;
+      }
+
+      .type-selection {
+        width: 100%;
+        margin: 30px 10px;
+        padding: 0 30px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .sort-selection {
+        width: 100%;
+        margin: 10px 0;
+
+        .form-group {
+          padding: 0;
+
+          .form-control {
+            width: 100%;
+          }
+        }
+      }
+
+      .submit-button {
+        display: flex;
+        justify-content: flex-end;
+
+        .btn {
+          margin-right: 20px;
+          width: 200px;
+          border: 1px solid;
+          border-radius: 20px;
+          background-color: $altBlue;
+        }
+      }
+    }
+
+    .submissions {
+
+      .results {
+        width: 100%;
+
+        .preview {
+          height: 300px;
+          object-fit: fill;
+
+          .card {
+            height: 100%;
+            background: transparent;
+
+            img {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+            }
+
+            .card-overlay {
+              background-color: rgba(0, 0, 0, 0.4);
+              display: flex;
+              justify-content: space-evenly;
+              align-items: flex-end;
+  
+              .card-title {
+                font-size: 24px;
+              }
+            }
+          }
+        }
+      }
+
+      .no-results {
+        width: 100%;
+        margin-left: 15px;
+        
+          .row {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+
+          .btn {
+            margin-right: 20px;
+            width: 200px;
+            border: 1px solid;
+            border-radius: 20px;
+            background-color: $altBlue;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .profile {
+    .user-info { 
+      .display-info {
+        margin: 20px;
+        padding: 0;
+      }
+
+      .display-info .row {
+        display: grid;
+        justify-content: center;
+      }
+    }
+
+    .filters {
+
+      .mobile-only {
+       display: none
+      }
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+  .profile {
+    .user-info {
+      margin: 10px 0;
+    }
+
+    .username {
+      margin: 5px -15px;
+    }
+
+    .socials {
+      padding-left: 200px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .results {
+
+    .card {
+      width: 100%;
+    }
+  }
+}

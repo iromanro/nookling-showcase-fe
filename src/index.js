@@ -1,42 +1,39 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import jwt from 'jsonwebtoken'
-import localStorage from 'store'
-import registerServiceWorker from './registerServiceWorker'
-import setAuthorizationToken from './utils/setAuthorizationToken'
-import { setCurrentUser } from './actions/globalAction'
-import store from './store'
-import history from './history'
-import App from './App'
-import './styles/main.scss'
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react"
+import ReactDOM from "react-dom"
+import { Router } from "react-router-dom"
+import { Provider } from "react-redux"
+import jwt from "jsonwebtoken"
+import localStorage from "store"
+import registerServiceWorker from "./registerServiceWorker"
+import setAuthorizationToken from "./utils/setAuthorizationToken"
+import { setCurrentUser } from "./actions/globalAction"
+import store from "./store"
+import history from "./history"
+import App from "./App"
+import "./styles/main.scss"
 
-// import setAuthorizationToken from './utils/setAuthorizationToken';
-// import { setCurrentUser } from './actions/userActions';
+// import setAuthorizationToken from "./utils/setAuthorizationToken";
+// import { setCurrentUser } from "./actions/userActions";
 
-const app = props => <App {...props}/>;
+const app = (props) => <App {...props} />
 
-function render(options = {}){
+function render() {
   ReactDOM.render((
     <Provider store={store}>
-      <Router history={history}>
-        {app()}
-      </Router>
+      <Router history={history}>{app()}</Router>
     </Provider>),
-    document.getElementById('root')
-  );
+    document.getElementById("root")
+  )
 }
 
-var token = localStorage.get('jwt');
+const token = localStorage.get("jwt")
 
-if(token){
-  console.log("tkn", token)
+if (token) {
   setAuthorizationToken(token)
   store.dispatch(setCurrentUser(jwt.decode(token)))
   render()
-}
-else{
+} else {
   render()
 }
 

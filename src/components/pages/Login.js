@@ -1,27 +1,24 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux"
-import { confirmAuth } from '../../actions/globalAction'
-import history from '../../history'
-import queryString from 'query-string'
-import FullScreenLoader from '../FullScreenLoader'
-import ToastMessage from '../ToastMessage'
-import MainNav from '../MainNav'
-import LoginForm from '../LoginForm'
+import React, { useEffect } from "react"
+import { useSelector } from "react-redux"
+import history from "../../history"
+import FullScreenLoader from "../FullScreenLoader"
+import ToastMessage from "../ToastMessage"
+import MainNav from "../MainNav"
+import LoginForm from "../LoginForm"
 
-export const Login = (props) => {
-  const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.global.isLoading)
-  const user = useSelector(state => state.global.user)
+const Login = () => {
+  const isLoading = useSelector((state) => state.global.isLoading)
+  const user = useSelector((state) => state.global.user)
 
   useEffect(() => {
     if (user.isAuthenticated) {
-      history.push('/')
+      history.push("/")
     }
   }, [user])
 
-  return(
+  return (
     <div className="main">
-      {isLoading ? <FullScreenLoader /> : ''}
+      {isLoading ? <FullScreenLoader /> : ""}
       <MainNav />
       <LoginForm />
       <ToastMessage />
@@ -29,4 +26,4 @@ export const Login = (props) => {
   )
 }
 
-export default Login;
+export default Login

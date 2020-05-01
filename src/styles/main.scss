@@ -1,6 +1,11 @@
-@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/scss/bootstrap";
 
-$mainblue: #7ad3ff;
+//$mainblue: #7ad3ff;
+$mainblue: #4C8EB6;
+//$backgroundGreen: #8CDFD6;
+$backgroundGreen: #F7F5F7;
+$greenBrand: #86CBA5;
+$greenAccent: #98CABA;
 $mainGreen: #558c6f;
 $mainRed: #ff4b4b;
 $altBlue: #3AAED8;
@@ -24,7 +29,9 @@ html, body {
   width: calc(100% - 40px);
   max-width: 935px;
   min-height: 100vh;
-  background-color: #8CDFD6;
+  display: block;
+  overflow: auto;
+  background-color: $backgroundGreen;
   box-shadow: rgb(62, 62, 62) 0px 0px 10px;
 }
 
@@ -51,4 +58,12 @@ html, body {
   input {
 
   }
+}
+
+.main-nav {
+  margin-bottom: 20px;
+}
+
+.bg-light {
+  background-color: #F7F5F7 !important;
 }

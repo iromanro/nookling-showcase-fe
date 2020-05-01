@@ -1,21 +1,18 @@
-import React from 'react';
-import '../styles/main.scss';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import React from "react"
+import "../styles/main.scss"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+import NavDropdown from "react-bootstrap/NavDropdown"
 
-export const FilterBar = (props) => {
-
-  return(
+const FilterBar = () => {
+  return (
     <Row xs={12} className="filters">
       <Col md={4}>
         <Form>
           <Form.Group>
-            <Form.Label>
-              Search
-            </Form.Label>
+            <Form.Label>Search</Form.Label>
             <Form.Control type="text" placeholder="name or keyword" />
           </Form.Group>
         </Form>
@@ -37,12 +34,10 @@ export const FilterBar = (props) => {
         </NavDropdown>
       </Col>
       <Col md={2} className="my-auto">
-        <Button>
-          Search
-        </Button>
+        <Button>Search</Button>
       </Col>
     </Row>
   )
 }
 
-export default FilterBar;
+export default FilterBar

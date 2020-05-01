@@ -7,7 +7,7 @@
     .user-info {
       height: 70%;
       align-content: center;
-      margin: 0px 10px;
+      margin: 50px 10px;
       
       .display-info {
         margin: 20px 0;
@@ -41,22 +41,25 @@
       }
       
       .custom-control label {
-        padding-left: 30px;
         margin-top: 10px;
         font-size: 14px;
+        width: 190px;
+        height: 20px;
       }
 
       .custom-control label::before {
         width: 30%;
         height: 100%;
         top: 0.1rem;
+        border: 1px #000 solid;
+        //background-color: rgb(181, 181, 181);
       }
 
       .custom-control label::after {
         width: 1rem;
         height: 1rem;
         left: calc(-2.25rem + 25px);
-        top: 0.35rem;
+        top: 0.22rem;
         transform: translateX(-1.3rem);
       }
     }
@@ -94,6 +97,7 @@
       border-color: #2364AA;
     }
   }
+
 }
 
 @media (min-width: 576px) {
