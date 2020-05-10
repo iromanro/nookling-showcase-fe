@@ -26,7 +26,6 @@ let mediaStorageRef = storage.ref().child("")
 const CreatePost = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.global.isLoading)
-  const postId = useSelector((state) => state.global.postId)
   const [filePreviews, setFilePreviews] = useState([])
   const [designName, setDesignName] = useState("")
   const [designType, setDesignType] = useState("Home")

@@ -1,104 +1,64 @@
-import React from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
+/* eslint-disable no-else-return */
+import React, { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { render } from "react-dom"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 
-const CarouselSelector = () => {
-  return (
-    <Container>
-      <Col className="item">
-        <Button block>
-          <Row className="ranking">
-            <Col>
-              <Row className="number">#1</Row>
-              <Row className="likes">1234 Likes</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="username">Username</Col>
-              </Row>
-              <Row>
-                <Col className="name">Content Name</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Button>
-      </Col>
-      <Col className="item">
-        <Button block>
-          <Row className="ranking">
-            <Col>
-              <Row className="number">#2</Row>
-              <Row className="likes">1010 Likes</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="username">Username</Col>
-              </Row>
-              <Row>
-                <Col className="name">Content Name</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Button>
-      </Col>
-      <Col className="item">
-        <Button block>
-          <Row className="ranking">
-            <Col>
-              <Row className="number">#3</Row>
-              <Row className="likes">904 Likes</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="username">Username</Col>
-              </Row>
-              <Row>
-                <Col className="name">Content Name</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Button>
-      </Col>
-      <Col className="item">
-        <Button block>
-          <Row className="ranking">
-            <Col>
-              <Row className="number">#4</Row>
-              <Row className="likes">603 Likes</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="username">Username</Col>
-              </Row>
-              <Row>
-                <Col className="name">Content Name</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Button>
-      </Col>
-      <Col className="item">
-        <Button block>
-          <Row className="ranking">
-            <Col>
-              <Row className="number">#5</Row>
-              <Row className="likes">302 Likes</Row>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="username">Username</Col>
-              </Row>
-              <Row>
-                <Col className="name">Content Name</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Button>
-      </Col>
-    </Container>
-  )
+const CarouselSelector = (props) => {
+  const [thumbnails, setThumbnails] = useState([])
+
+  useEffect(() => {
+    renderThumbnails()
+  }, [props.index])
+
+  const renderThumbnails = () => {
+    let renderColumns = []
+
+    if (props.images != null) {
+      props.images.map((image, i) => {
+        renderColumns.push(
+          <Col xs={3} sm="2" className="thumbnail my-2 mx-3" key={`thumbnail-${i}`}>
+            <Button
+              key={`button-${i}`}
+              onClick={() => props.goTo(i)}
+              className={`${i === props.index ? "active" : ""}`}
+            >
+              <img src={image.path} />
+            </Button>
+          </Col>
+        )
+
+        if ((i + 1) % 4 === 0 && i < props.images.length - 1) {
+          renderColumns.push(
+            <div className="thumbnail-large w-100" key={`wrap-${i}`} />
+          )
+        } else if((i + 1) % 3 === 0 && i < props.images.length - 1) {
+          renderColumns.push(
+            <div className="thumbnail-small w-100" key={`wrap-${i}`} />
+          )
+        }
+      })
+    }
+
+    setThumbnails(renderColumns)
+  }
+
+  if (props.images != null && props.images.length > 1) {
+    return (
+      <div className="row carousel-thumbnails justify-content-center">
+        {thumbnails}
+      </div>
+    )
+  } else if (props.images == null) {
+    return (
+      <div className="container d-flex justify-content-center">
+        <div className="spinner-border my-auto" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default CarouselSelector

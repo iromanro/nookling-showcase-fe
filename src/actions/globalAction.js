@@ -236,7 +236,7 @@ export function submitPost(
       type: "CREATE_POST",
       payload: axios({
         method: "POST",
-        url: `${process.env.REACT_APP_API_URL}/api/v1/post`,
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -250,12 +250,89 @@ export function submitPost(
           allowContributions: contributions,
         },
       }),
-    }).then((post) => {
-      console.log("Post: ", post)
-      history.push(`/design/${post.action.payload.data.postId}`)
+    }).then((newPost) => {
+      history.push(`/design/${newPost.action.payload.data.postId}`)
     })
 }
-
+export function getDesign(uuid) {
+  return (dispatch) =>
+    dispatch({
+      type: "GET_DESIGN",
+      payload: axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${uuid}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    })
+}
+export function likeDesign(uuid) {
+  return (dispatch) =>
+    dispatch({
+      type: "LIKE_DESIGN",
+      payload: axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${uuid}/like`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    })
+}
+export function itemSearch(term) {
+  return (dispatch) =>
+    dispatch({
+      type: "SEARCH_ITEM",
+      payload: axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/search/item/${term}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    })
+}
+export function clearItemSearch() {
+  return (dispatch) =>
+    dispatch({
+      type: "CLEAR_RESULTS",
+    })
+}
+export function addItemToDesign(designId, itemId) {
+  return (dispatch) =>
+    dispatch({
+      type: "ADD_ITEM_TO_DESIGN",
+      payload: axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${designId}/item`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          itemId,
+        },
+      }),
+    }).then(() => {
+      dispatch(clearItemSearch())
+    })
+}
+export function removeItemFromDesign(designId, itemId) {
+  return (dispatch) =>
+    dispatch({
+      type: "REMOVE_ITEM_FROM_DESIGN",
+      payload: axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${designId}/item/remove`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          itemId,
+        },
+      }),
+    })
+}
 export function clearToast() {
   return (dispatch) =>
     dispatch({

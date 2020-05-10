@@ -10,6 +10,12 @@ const globalReducer = (
     },
     profile: {},
     creations: [],
+    design: null,
+    furniture: [],
+    designLiked: false,
+    likes: 0,
+    isSearching: false,
+    itemResults: [],
     isLoading: false,
     toastMsg: "",
     toastErr: false,
@@ -36,6 +42,7 @@ const globalReducer = (
 
       const userState = {
         isAuthenticated: true,
+        uuid: userToken.uuid,
         username: userToken.username,
         discriminator: userToken.discriminator,
       }
@@ -96,6 +103,7 @@ const globalReducer = (
 
       const userState = {
         isAuthenticated: true,
+        uuid: userToken.uuid,
         username: userToken.username,
         discriminator: userToken.discriminator,
       }
@@ -144,11 +152,13 @@ const globalReducer = (
     }
     case "USER_EMAIL_CREATION_FULFILLED": {
       setAuthorizationToken(action.payload.data.jwt)
+      const userToken = jwt.decode(action.payload.data.jwt)
       localStorage.set("jwt", action.payload.data.jwt)
 
       const userState = {
         isAuthenticated: true,
-        username: action.payload.data.username,
+        uuid: userToken.uuid,
+        username: userToken.username,
       }
 
       return {
@@ -204,6 +214,7 @@ const globalReducer = (
 
       const userState = {
         isAuthenticated: true,
+        uuid: userToken.uuid,
         username: userToken.username,
         discriminator: userToken.discriminator,
       }
@@ -232,6 +243,7 @@ const globalReducer = (
 
       const userState = {
         isAuthenticated: true,
+        uuid: action.user.uuid,
         username: action.user.username,
         discriminator: action.user.discriminator,
       }
@@ -321,6 +333,119 @@ const globalReducer = (
       return {
         ...state,
         isLoading: false,
+      }
+    }
+    case "GET_DESIGN_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "GET_DESIGN_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: "Could not find that design!",
+      }
+    }
+    case "GET_DESIGN_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        design: action.payload.data.design,
+        designLiked: action.payload.data.userLiked,
+        likes: action.payload.data.likes,
+        furniture: action.payload.data.furniture,
+      }
+    }
+    case "LIKE_DESIGN_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "LIKE_DESIGN_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: "Could not like this design!",
+      }
+    }
+    case "LIKE_DESIGN_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        designLiked: action.payload.data.liked,
+        likes: action.payload.data.likes,
+      }
+    }
+    case "SEARCH_ITEM_PENDING": {
+      return {
+        ...state,
+        isSearching: true,
+      }
+    }
+    case "SEARCH_ITEM_REJECTED": {
+      return {
+        ...state,
+        isSearching: false,
+      }
+    }
+    case "SEARCH_ITEM_FULFILLED": {
+      return {
+        ...state,
+        isSearching: false,
+        itemResults: action.payload.data.results,
+      }
+    }
+    case "ADD_ITEM_TO_DESIGN_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "ADD_ITEM_TO_DESIGN_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: action.payload.data.message,
+      }
+    }
+    case "ADD_ITEM_TO_DESIGN_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        furniture: action.payload.data.furniture,
+      }
+    }
+    case "REMOVE_ITEM_FROM_DESIGN_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "REMOVE_ITEM_FROM_DESIGN_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: action.payload.data.message,
+      }
+    }
+    case "REMOVE_ITEM_FROM_DESIGN_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        furniture: action.payload.data.furniture,
+      }
+    }
+    case "CLEAR_RESULTS": {
+      return {
+        ...state,
+        itemResults: [],
       }
     }
     case "CLEAR_TOAST": {

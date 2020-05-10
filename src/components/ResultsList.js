@@ -8,11 +8,15 @@ import "../styles/main.scss"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "react-bootstrap/Card"
-
-const storage = firebase.storage()
+import history from "../history"
 
 const ResultsList = (props) => {
   const [columns, setColumns] = useState([])
+
+  const goTo = (path) => {
+    console.log(path)
+    history.push(path)
+  }
 
   useEffect(() => {
     const renderColumns = []
@@ -22,26 +26,27 @@ const ResultsList = (props) => {
       props.results.map((preview, index) => {
         renderColumns.push(
           <Col xs={12} lg={6} className="my-3 preview" key={`preview-${index}`}>
-            <Card className="bg-dark text-white card">
-              <img src={preview.images[0].path} alt="Creation image" />
-              <Card.ImgOverlay className="card-overlay">
-                <Col>
-                  <Row>
-                    <Card.Title className="my-1">{preview.name}</Card.Title>
-                  </Row>
-                  {preview.display_name && (
+            <a onClick={() => goTo(`/design/${preview.uuid}`)}>
+              <Card className="bg-dark text-white card">
+                <img src={preview.images[0].path} alt="User Design" />
+                <Card.ImgOverlay className="card-overlay">
+                  <Col>
                     <Row>
-                      <Card.Text className="my-1">
-                        {preview.display_name}
-                      </Card.Text>
+                      <Card.Title className="my-1">{preview.name}</Card.Title>
                     </Row>
-                  )}
-                </Col>
-              </Card.ImgOverlay>
-            </Card>
+                    {preview.display_name && (
+                      <Row>
+                        <Card.Text className="my-1">
+                          {preview.display_name}
+                        </Card.Text>
+                      </Row>
+                    )}
+                  </Col>
+                </Card.ImgOverlay>
+              </Card>
+            </a>
           </Col>
         )
-
         if ((index + 1) % 2 === 0 && index < props.results.length - 1) {
           renderColumns.push(
             <div className="desktop-only w-100" key={`wrap-${index}`} />
@@ -61,7 +66,7 @@ const ResultsList = (props) => {
 }
 
 ResultsList.propTypes = {
-  results: propTypes.string.isRequired,
+  results: propTypes.array.isRequired,
 }
 
 export default ResultsList
