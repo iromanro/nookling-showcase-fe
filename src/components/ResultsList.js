@@ -13,7 +13,6 @@ const ResultsList = (props) => {
   const [columns, setColumns] = useState([])
 
   const goTo = (path) => {
-    console.log(path)
     history.push(path)
   }
 
@@ -61,7 +60,6 @@ const ResultsList = (props) => {
 
   return (
     <Col className="results">
-      {console.log("Results: ", props.results.length)}
       <Row>{columns}</Row>
     </Col>
   )

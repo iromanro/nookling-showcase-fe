@@ -21,7 +21,6 @@ const searchReducer = (
       }
     }
     case "SEARCH_CREATIONS_FULFILLED": {
-      console.log("Reducer: ", action.payload.data.creations)
       return {
         ...state,
         isLoading: false,

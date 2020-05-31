@@ -29,7 +29,6 @@ const Home = () => {
     <div className="main">
       <MainNav />
       <Container>
-        {console.log("Creations: ", creations)}
         <Col className="main-content">
           <Row>
             <Navbar bg="light" expand="lg">
