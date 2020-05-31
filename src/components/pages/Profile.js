@@ -75,10 +75,7 @@ const Profile = () => {
               <Row xs={12} className="user-info">
                 <Col xs={12} sm={2} className="display-info">
                   <Row>
-                    <Image
-                      src="https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png"
-                      roundedCircle
-                    />
+                    <Image src={profile.avatar} roundedCircle />
                   </Row>
                   {profile.username && (
                     <Row className="username">
@@ -205,7 +202,7 @@ const Profile = () => {
                     )}
                     {!publicProfile && (
                       <Row className="my-3">
-                        <Button onClick={() => goTo("/create")}>
+                        <Button onClick={() => goTo("/post")}>
                           Make something
                         </Button>
                       </Row>

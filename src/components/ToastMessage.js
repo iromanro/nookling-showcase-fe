@@ -24,6 +24,7 @@ const ToastMessage = () => {
     }
 
     if (toastMsg !== "") {
+      console.log(toastMsg)
       toggleShow()
     }
   }, [toastMsg])

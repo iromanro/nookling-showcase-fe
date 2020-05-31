@@ -35,9 +35,7 @@ const MainNav = () => {
               Custom Patterns
             </Nav.Link>
             {user.isAuthenticated && (
-              <Nav.Link onClick={() => goToPage("/post")}>
-                Create Post
-              </Nav.Link>
+              <Nav.Link onClick={() => goToPage("/post")}>Create Post</Nav.Link>
             )}
             {user.isAuthenticated && (
               <Nav.Link onClick={() => goToPage("/profile")}>Profile</Nav.Link>

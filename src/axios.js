@@ -26,8 +26,15 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 403) {
-      store.dispatch(userLogout())
-      history.push("/")
+      if (error.response.data.message === "Unauthorized. No token provided.") {
+        store.dispatch(userLogout())
+        history.push("/")
+      } else if (
+        error.response.data.message === "Not allowed" &&
+        window.location.href.indexOf("post")
+      ) {
+        history.push("/post")
+      }
     } else if (error.response && error.response.status === 404) {
       history.push("/404")
     }

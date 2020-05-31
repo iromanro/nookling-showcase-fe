@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import "../../styles/main.scss"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
@@ -9,12 +10,26 @@ import MainNav from "../MainNav"
 import FilterBar from "../FilterBar"
 import ResultsList from "../ResultsList"
 import ToastMessage from "../ToastMessage"
+import { getCreations } from "../../actions/searchActions"
 
 const Home = () => {
+  const dispatch = useDispatch()
+  const [query, setQuery] = useState([])
+  const creations = useSelector((state) => state.search.creations)
+
+  useEffect(() => {
+    function fetchCreations() {
+      dispatch(getCreations(query))
+    }
+
+    fetchCreations()
+  }, [])
+
   return (
     <div className="main">
       <MainNav />
       <Container>
+        {console.log("Creations: ", creations)}
         <Col className="main-content">
           <Row>
             <Navbar bg="light" expand="lg">
@@ -26,7 +41,7 @@ const Home = () => {
               </Navbar.Collapse>
             </Navbar>
           </Row>
-          {/* <ResultsList /> */}
+          <ResultsList results={creations} />
         </Col>
       </Container>
       <ToastMessage />

@@ -14,9 +14,15 @@ import Form from "react-bootstrap/Form"
 import Image from "react-bootstrap/Image"
 import Button from "react-bootstrap/Button"
 import { v4 as uuidv4 } from "uuid"
-import { submitPost } from "../../actions/globalAction"
+import {
+  submitPost,
+  updatePost,
+  deletePost,
+  loadExistingPost,
+} from "../../actions/globalAction"
 import MainNav from "../MainNav"
 import ToastMessage from "../ToastMessage"
+import ConfirmationModal from "../ConfirmationModal"
 import FullScreenLoader from "../FullScreenLoader"
 
 const reader = new FileReader()
@@ -26,7 +32,9 @@ let mediaStorageRef = storage.ref().child("")
 const CreatePost = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.global.isLoading)
+  const design = useSelector((state) => state.global.design)
   const [filePreviews, setFilePreviews] = useState([])
+  const [newFiles, setNewFiles] = useState([])
   const [designName, setDesignName] = useState("")
   const [designType, setDesignType] = useState("Home")
   const [designTags, setDesignTags] = useState([])
@@ -36,9 +44,11 @@ const CreatePost = () => {
   const [loadingImages, setLoadingImages] = useState(false)
   const [canUpload, setCanUpload] = useState(true)
   const [allowContribution, setAllowContribution] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
   const onDrop = useCallback((acceptedFiles) => {
-    const tempFiles = filePreviews
+    const tempFiles = []
     setLoadingImages(true)
 
     acceptedFiles.forEach((file) => {
@@ -46,20 +56,15 @@ const CreatePost = () => {
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = () => {}
 
-      console.log("We loaded")
       if (file.size <= 21000000) {
         tempFiles.push({
           file,
           name: "",
+          new: true,
         })
       } else {
         setFileError("One or more files is too big! Max allowed size is 20MB.")
       }
-
-      // mediaStorageRef = storage.ref().child(`media/${fileName}`)
-      // mediaStorageRef.put(file).then((snapshot) => {
-      //   console.log('Uploaded file:', snapshot)
-      // })
     })
 
     if (filePreviews.length >= 20 && canUpload) {
@@ -69,7 +74,7 @@ const CreatePost = () => {
     }
 
     setLoadingImages(false)
-    setFilePreviews(tempFiles)
+    setNewFiles(tempFiles)
   }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -78,19 +83,45 @@ const CreatePost = () => {
     maxSize: 20000000,
   })
 
-  useEffect(() => {}, [filePreviews])
+  useEffect(() => {
+    const tempFiles = [...filePreviews]
+
+    newFiles.forEach((file) => {
+      tempFiles.push(file)
+    })
+
+    setFilePreviews(tempFiles)
+  }, [newFiles])
+
+  useEffect(() => {
+    if (window.location.pathname.split("/")[2]) {
+      const uuid = window.location.pathname.split("/")[2]
+      dispatch(loadExistingPost(uuid))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (design) {
+      setIsEditing(true)
+      setDesignName(design.designName)
+      setDesignType(design.designType)
+      setDesignTags(design.designTags)
+      setDescription(design.description)
+      setAllowContribution(design.allowContribution)
+      setFilePreviews(design.images)
+    }
+  }, [design])
 
   const updateFilensame = (input, index) => {
     const tempPreviews = [...filePreviews]
     tempPreviews[index].name = input
-    setFilePreviews(tempPreviews)
   }
 
   const updateDesignName = (input) => {
     setDesignName(input)
   }
 
-  const changeContribution = () => {
+  const toggleContributionValue = () => {
     setAllowContribution(!allowContribution)
   }
 
@@ -140,49 +171,84 @@ const CreatePost = () => {
     }
 
     if (!hasErrors) {
-      const folder = uuidv4()
+      let folder = ""
+      if (isEditing) {
+        folder = design.uuid
+      } else {
+        folder = uuidv4()
+      }
 
       Promise.all(
         filePreviews.map((image) => {
-          const filename = uuidv4()
-          mediaStorageRef = storage.ref().child(`media/${folder}/${filename}`)
-          return mediaStorageRef.put(image.file)
+          if (image.new) {
+            const filename = uuidv4()
+            mediaStorageRef = storage.ref().child(`media/${folder}/${filename}`)
+            return mediaStorageRef.put(image.file)
+          }
         })
       ).then((uploadedFiles) => {
         Promise.all(
           uploadedFiles.map((file) => {
-            mediaStorageRef = storage.ref().child(file.metadata.fullPath)
-            return mediaStorageRef.getDownloadURL()
+            if (file) {
+              mediaStorageRef = storage.ref().child(file.metadata.fullPath)
+              return mediaStorageRef.getDownloadURL()
+            }
           })
         ).then((downloadedFiles) => {
           const files = []
 
           filePreviews.forEach((file, index) => {
-            const newFile = {
-              path: downloadedFiles[index],
-              name: filePreviews[index].name,
-            }
+            if (file.new) {
+              const newFile = {
+                path: downloadedFiles[index],
+                name: filePreviews[index].name,
+              }
 
-            files.push(newFile)
+              files.push(newFile)
+            } else {
+              files.push(file)
+            }
           })
 
-          console.log("NEW POST: ", files)
-
-          dispatch(
-            submitPost(
-              folder,
-              files,
-              designName,
-              designType,
-              designTags,
-              description,
-              allowContribution
+          if (isEditing) {
+            dispatch(
+              updatePost(
+                folder,
+                files,
+                designName,
+                designTags,
+                description,
+                allowContribution
+              )
             )
-          )
+          } else {
+            dispatch(
+              submitPost(
+                folder,
+                files,
+                designName,
+                designType,
+                designTags,
+                description,
+                allowContribution
+              )
+            )
+          }
         })
       })
     }
   }
+
+  const toggleConfirmationModal = useCallback(() => {
+    setShowConfirmationModal(!showConfirmationModal)
+  }, [showConfirmationModal])
+
+  const deleteCurrentPost = useCallback(() => {
+    if (design) {
+      console.log("WE DELETING")
+      dispatch(deletePost(design.uuid))
+    }
+  }, [design])
 
   const addTag = (event) => {
     event.preventDefault()
@@ -191,7 +257,7 @@ const CreatePost = () => {
       event.target.value !== "" &&
       designTags.length <= 9
     ) {
-      setDesignTags([...designTags, event.target.value])
+      setDesignTags([...designTags, event.target.value.trim()])
       event.target.value = ""
     }
   }
@@ -222,6 +288,11 @@ const CreatePost = () => {
     <div className="main">
       {isLoading && <FullScreenLoader />}
       <MainNav />
+      <ConfirmationModal
+        show={showConfirmationModal}
+        toggle={toggleConfirmationModal}
+        confirm={deleteCurrentPost}
+      />
       <Container>
         <Row className="main-content">
           <Col xs={12} lg={6} className="file-uploader">
@@ -258,7 +329,11 @@ const CreatePost = () => {
                     )}
                     <Row xs={12} className="thumbnail">
                       <Button onClick={() => removeImage(index)}>x</Button>
-                      <Image src={URL.createObjectURL(image.file)} />
+                      {image.file ? (
+                        <Image src={URL.createObjectURL(image.file)} />
+                      ) : (
+                        <Image src={image.path} />
+                      )}
                     </Row>
                     <Row xs={12} className="name">
                       <Form
@@ -315,7 +390,7 @@ const CreatePost = () => {
                   <Form.Group controlId="formDisplayName">
                     <Form.Label>Design Name</Form.Label>
                     <Form.Control
-                      type="text"
+                      // type="text"
                       placeholder="Name your design"
                       maxLength={40}
                       value={designName}
@@ -338,6 +413,7 @@ const CreatePost = () => {
                     <Form.Control
                       as="select"
                       value={designType}
+                      disabled={isEditing}
                       onChange={(e) => selectType(e.target.value)}
                     >
                       <option value="Home">Home</option>
@@ -350,14 +426,18 @@ const CreatePost = () => {
             </Row>
             <Row xs={12} className="tags">
               <ul className="list">
-                {designTags.map((tag, index) => (
-                  <li className="tag" key={`tag-${index}`}>
-                    <span>{tag}</span>
-                    <Button className="close ml-1" onClick={() => removeTag(index)}>
-                      x
-                    </Button>
-                  </li>
-                ))}
+                {designTags &&
+                  designTags.map((tag, index) => (
+                    <li className="tag" key={`tag-${index}`}>
+                      <span>{tag}</span>
+                      <Button
+                        className="close ml-1"
+                        onClick={() => removeTag(index)}
+                      >
+                        x
+                      </Button>
+                    </li>
+                  ))}
               </ul>
               <Form
                 onSubmit={(e) => {
@@ -366,17 +446,18 @@ const CreatePost = () => {
                 id="tag-input"
               >
                 <Form.Label>Tags</Form.Label>
-                <Form.Control
-                  type="text"
-                  onKeyUp={(e) => addTag(e)}
-                  placeholder={
-                    designTags.length === 10
-                      ? "Maximum allowed tags added"
-                      : "Press enter to add tag"
-                  }
-                  disabled={designTags.length === 10}
-                  // onChange={(e) => updateTagInput(e.target.value)}
-                />
+                {designTags && (
+                  <Form.Control
+                    type="text"
+                    onKeyUp={(e) => addTag(e)}
+                    placeholder={
+                      designTags.length === 10
+                        ? "Maximum allowed tags added"
+                        : "Press enter to add tag"
+                    }
+                    disabled={designTags.length === 10}
+                  />
+                )}
               </Form>
             </Row>
             <Row xs={12} id="contributions-checkbox">
@@ -386,8 +467,8 @@ const CreatePost = () => {
                     name="allow-contributions"
                     label="Allow furniture contributions"
                     htmlFor="allow-checkbox"
-                    onChange={changeContribution}
-                    value={allowContribution}
+                    onChange={() => toggleContributionValue()}
+                    checked={allowContribution}
                   />
                   <Form.Text className="sublabel">
                     {`If you allow contributions, other users are able to add any furniture they believe is displayed in your post.\nYou can remove furniture and disable this option at any time.`}
@@ -396,7 +477,7 @@ const CreatePost = () => {
               </Form>
             </Row>
             <Row xs={12} className="description">
-              <Form >
+              <Form>
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -414,8 +495,17 @@ const CreatePost = () => {
               </Form>
             </Row>
             <Row xs={12} className="submit">
-              <Button onClick={() => submitNewPost()}>Create Post</Button>
+              <Button onClick={() => submitNewPost()}>
+                {isEditing ? "Save Post" : "Create Post"}
+              </Button>
             </Row>
+            {isEditing && (
+              <Row xs={12} className="delete">
+                <Button onClick={() => toggleConfirmationModal()}>
+                  Delete Post
+                </Button>
+              </Row>
+            )}
           </Col>
         </Row>
       </Container>

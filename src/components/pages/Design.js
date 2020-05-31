@@ -58,11 +58,11 @@ const Design = () => {
   }, [])
 
   useEffect(() => {
-    if (design && user.isAuthenticated) {
-      if (design.allowContributions) {
-        setCanAddFurniture(true)
-      } else if (design.user.uuid === user.uuid) {
+    if (design && user) {
+      if (design.user && design.user.uuid === user.uuid) {
         setCanEditPost(true)
+        setCanAddFurniture(true)
+      } else if (design.allowContributions) {
         setCanAddFurniture(true)
       }
     }
@@ -131,7 +131,7 @@ const Design = () => {
               {item.name}
             </Col>
             <Col xs={4} className="remove">
-              {design.user.uuid === user.uuid && (
+              {design.uer && design.user.uuid === user.uuid && (
                 <Button variant="link" onClick={() => removeItem(item.uuid)}>
                   X
                 </Button>
@@ -142,7 +142,7 @@ const Design = () => {
       });
       setFurnitureList(list)
     }
-  }, [furniture]);
+  }, [furniture])
 
 
   return (
@@ -217,17 +217,13 @@ const Design = () => {
               <Row className="design-info my-4">
                 <Col xs={12} sm={4} className="profile-picture">
                   <Row xs={12} className="picture">
-                    <Image
-                      src="https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png"
-                      roundedCircle
-                    />
+                    <Image src={design.user.avatar} roundedCircle />
                   </Row>
                   <Row xs={12} className="display-name my-2">
                     {design.user && <Row>{design.user.display_name}</Row>}
                   </Row>
                 </Col>
                 <Col xs={12} sm={8} className="stats">
-
                   <Row id="description">{design.description}</Row>
                   <Row className="tag-list mt-4 ">
                     {design.tags &&

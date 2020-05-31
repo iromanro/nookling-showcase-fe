@@ -69,12 +69,16 @@
           align-items: center;
 
           .btn {
-            position: relative;
+            position: absolute;
             background-color: none;
             background-color: $altBlue;
             border-radius: 20px;
+            line-height: 0;
+            padding: 0;
+            width: 24px;
+            height: 24px;
             // top: 50px;
-            left: 40%;
+            left: 80%;
           }
 
           img {
@@ -199,7 +203,16 @@
     .submit {
 
       .btn {
-        margin: 30px 15px;
+        margin: 15px;
+        width: 100%;
+      }
+    }
+
+    .delete {
+
+      .btn {
+        background-color: $mainRed;
+        margin: 15px;
         width: 100%;
       }
     }
@@ -225,7 +238,7 @@
       .preview {
         .thumbnail {
           .btn {
-            top: 15px;
+            top: 40px;
           }
         }
       }

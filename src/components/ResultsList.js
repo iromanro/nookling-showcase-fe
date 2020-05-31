@@ -2,7 +2,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from "react"
-import firebase from "firebase"
 import propTypes from "prop-types"
 import "../styles/main.scss"
 import Row from "react-bootstrap/Row"
@@ -32,7 +31,9 @@ const ResultsList = (props) => {
                 <Card.ImgOverlay className="card-overlay">
                   <Col>
                     <Row>
-                      <Card.Title className="my-1">{preview.name}</Card.Title>
+                      <Card.Title className="my-1">
+                        {preview.design_name}
+                      </Card.Title>
                     </Row>
                     {preview.display_name && (
                       <Row>
@@ -60,6 +61,7 @@ const ResultsList = (props) => {
 
   return (
     <Col className="results">
+      {console.log("Results: ", props.results.length)}
       <Row>{columns}</Row>
     </Col>
   )

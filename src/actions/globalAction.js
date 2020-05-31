@@ -254,6 +254,60 @@ export function submitPost(
       history.push(`/design/${newPost.action.payload.data.postId}`)
     })
 }
+
+export function updatePost(post, images, name, tags, desc, contributions) {
+  return (dispatch) =>
+    dispatch({
+      type: "UPDATE_POST",
+      payload: axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${post}/edit`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          images,
+          name,
+          tags,
+          description: desc,
+          allowContributions: contributions,
+        },
+      }),
+    }).then((newPost) => {
+      history.push(`/design/${newPost.action.payload.data.postId}`)
+    })
+}
+
+export function loadExistingPost(uuid) {
+  return (dispatch) =>
+    dispatch({
+      type: "LOAD_EXISTING_POST",
+      payload: axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${uuid}/edit`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    })
+}
+
+export function deletePost(uuid) {
+  return (dispatch) =>
+    dispatch({
+      type: "DELETE_POST",
+      payload: axios({
+        method: "DELETE",
+        url: `${process.env.REACT_APP_API_URL}/api/v1/design/${uuid}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    }).then(() => {
+      history.push("/")
+    })
+}
+
 export function getDesign(uuid) {
   return (dispatch) =>
     dispatch({
@@ -265,8 +319,11 @@ export function getDesign(uuid) {
           "Content-Type": "application/json",
         },
       }),
+    }).then((response) => {
+      console.log("Res: ", response)
     })
 }
+
 export function likeDesign(uuid) {
   return (dispatch) =>
     dispatch({
@@ -280,6 +337,7 @@ export function likeDesign(uuid) {
       }),
     })
 }
+
 export function itemSearch(term) {
   return (dispatch) =>
     dispatch({
@@ -293,12 +351,14 @@ export function itemSearch(term) {
       }),
     })
 }
+
 export function clearItemSearch() {
   return (dispatch) =>
     dispatch({
       type: "CLEAR_RESULTS",
     })
 }
+
 export function addItemToDesign(designId, itemId) {
   return (dispatch) =>
     dispatch({
@@ -317,6 +377,7 @@ export function addItemToDesign(designId, itemId) {
       dispatch(clearItemSearch())
     })
 }
+
 export function removeItemFromDesign(designId, itemId) {
   return (dispatch) =>
     dispatch({
@@ -333,6 +394,7 @@ export function removeItemFromDesign(designId, itemId) {
       }),
     })
 }
+
 export function clearToast() {
   return (dispatch) =>
     dispatch({

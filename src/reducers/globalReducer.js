@@ -335,6 +335,70 @@ const globalReducer = (
         isLoading: false,
       }
     }
+    case "LOAD_EXISTING_POST_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "LOAD_EXISTING_POST_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: action.payload.response.data.message,
+      }
+    }
+    case "LOAD_EXISTING_POST_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        design: action.payload.data.design,
+      }
+    }
+    case "UPDATE_POST_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
+    case "UPDATE_POST_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: "Unable to update post!",
+      }
+    }
+    case "UPDATE_POST_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: false,
+        toastMsg: "Post updated successfully!",
+      }
+    }
+    case "DELETE_POST_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+      }
+    }
+    case "DELETE_POST_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastErr: true,
+        toastMsg: "Unable to delete post!",
+      }
+    }
+    case "DELETE_POST_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        toastMsg: "Posted deleted successfully!",
+      }
+    }
     case "GET_DESIGN_PENDING": {
       return {
         ...state,
@@ -346,7 +410,7 @@ const globalReducer = (
         ...state,
         isLoading: false,
         toastErr: true,
-        toastMsg: "Could not find that design!",
+        toastMsg: action.payload.response.data.message,
       }
     }
     case "GET_DESIGN_FULFILLED": {
@@ -407,11 +471,14 @@ const globalReducer = (
       }
     }
     case "ADD_ITEM_TO_DESIGN_REJECTED": {
+      console.log("Payload: ", action.payload)
+      console.log("Response: ", action.payload.response)
+      console.log("Data: ", action.payload.response.data)
       return {
         ...state,
         isLoading: false,
         toastErr: true,
-        toastMsg: action.payload.data.message,
+        toastMsg: action.payload.response.data.message,
       }
     }
     case "ADD_ITEM_TO_DESIGN_FULFILLED": {
@@ -432,7 +499,7 @@ const globalReducer = (
         ...state,
         isLoading: false,
         toastErr: true,
-        toastMsg: action.payload.data.message,
+        toastMsg: action.payload.response.data.message,
       }
     }
     case "REMOVE_ITEM_FROM_DESIGN_FULFILLED": {

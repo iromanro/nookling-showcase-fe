@@ -21,7 +21,7 @@ const App = ({ loading }) =>
       <Route exact path="/login" component={Login} />
       <Route exact path="/event" component={Event} />
       <Route exact path="/profile" component={Profile} />
-      <Route exact path="/post" component={CreatePost} />
+      <Route exact path="/post" component={requireAuth(CreatePost)} />
       <Route exact path="/post/:uuid" component={CreatePost} />
       <Route exact path="/design/:uuid" component={Design} />
       <Route path="/profile/:uuid" component={Profile} />

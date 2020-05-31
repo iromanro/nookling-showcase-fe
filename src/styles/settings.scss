@@ -20,12 +20,34 @@
         height: 124px;
         width: 124px;
         border: 1px solid;
-        object-fit: none;
+        object-fit: contain;
         margin: 5px 20px;
 
         .row {
           margin: 20px;
         }
+      }
+
+      .file-uploader {
+        width: 35px;
+        background: none;
+        border: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 100%;
+        bottom: 40%;
+
+        svg {
+          color: $mainblue;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .file-uploader:hover {
+        cursor: pointer;
       }
 
       .display-name {
