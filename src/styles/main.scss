@@ -35,6 +35,19 @@ html, body {
   box-shadow: rgb(62, 62, 62) 0px 0px 10px;
 }
 
+#mainnav {
+  background-color: #fff !important;
+
+  .nav-link {
+    color: $altBlue;
+  }
+
+  .nav-link:hover {
+    color: $mainblue;
+    text-decoration: underline;
+  }
+}
+
 .toast {
   position: absolute;
   top: 95vh;

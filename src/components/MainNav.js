@@ -23,13 +23,13 @@ const MainNav = () => {
 
   return (
     <div>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" id="mainnav">
         <Navbar.Brand onClick={() => goToPage("/")}>
           Nookling Showcase
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="mx-auto">
             <Nav.Link onClick={() => goToPage("/homes")}>Homes</Nav.Link>
             <Nav.Link onClick={() => goToPage("/patterns")}>
               Custom Patterns
