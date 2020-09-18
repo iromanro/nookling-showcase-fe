@@ -6,6 +6,8 @@ View Live: https://www.nooklingshowcase.com/
 
 ReactJS | Redux | Bootstrap | Javascript | CSS | Firebase
 
+Back End Project: https://github.com/iromanro/nookling-showcase-be
+
 ## Introduction
 
 This site allows users to share their home and pattern creations for Animal Crossing: New Horizons for the Nintendo SWitch.
