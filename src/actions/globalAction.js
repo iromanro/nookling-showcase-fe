@@ -11,7 +11,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   projectId: "nookling-showcase",
   messagingSenderId: "102138940958",
-  appId: "1:102138940958:web:d91990cfc6ba015c6be80f",
+  appId: process.env.REACT_APP_APP_ID,
   measurementId: "G-MK2Q25LDMP",
 }
 
