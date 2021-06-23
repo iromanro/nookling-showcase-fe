@@ -46,7 +46,7 @@ const MainNav = () => {
               </Nav.Link>
             )}
             {!user.isAuthenticated ? (
-              <Nav.Link onClick={() => login()}>Log in</Nav.Link>
+              <Nav.Link onClick={() => `login()}>Log in</Nav.Link>
             ) : (
               <Nav.Link onClick={() => logout()}>Log out</Nav.Link>
             )}
